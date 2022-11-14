@@ -10,7 +10,7 @@ import AuthLayout from './code/layout/AuthLayout';
 import Signup from './code/pages/Signup';
 
 
-function App() {
+function App() : JSX.Element {
     return (
         <Router>
             <div>

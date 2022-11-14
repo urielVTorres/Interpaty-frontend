@@ -1,21 +1,34 @@
-import {useState} from 'react'
+import React, {ReactEventHandler, useState} from 'react'
 import axios from 'axios'
 import Alerta from '../components/Alerta';
 
-const AgregarProducto =  () => {
-  const [producto, setProducto]= useState({
+interface IProduct {
+    concepto: string;
+    precio: string;
+    imagen: string;
+    linked: string;
+    categoria: string;
+}
+
+interface IAlerta {
+    msg: string | null,
+    error: boolean | null
+}
+
+const AgregarProducto : React.FunctionComponent =  () : JSX.Element => {
+  const [producto, setProducto]= useState<IProduct>({
         concepto:'',
         precio:'',
         imagen:'',
         linked:'',
         categoria:''
   });
-  const [alerta, setAlerta] = useState({});
-  const handleSubmit = async e => {
+  const [alerta, setAlerta] = useState<IAlerta>({msg:null, error:null});
+  const handleSubmit = async (e : React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     //Modificar el acceso de las políticas de CORS
     try {
-      const {data} = await axios.post(`${process.env.REACT_APP_URL_BACKEND}/agregar`, {
+      const {data}  = await axios.post(`${process.env.REACT_APP_URL_BACKEND}/agregar`, {
         headers: {
           'Content-Type': 'application/json;charset=UTF-8',
           'Access-Control-Allow-Origin': '*'
@@ -51,7 +64,7 @@ const AgregarProducto =  () => {
                   placeholder='Nombre del Producto'
                   className='bg-stone-200 rounded-md border-rose-300 block border-2 my-2 text-xl p-2 md:w-3/4 w-full focus:bg-white'
                   value={producto.concepto || ''}
-                  onChange={e =>{
+                  onChange={(e : React.ChangeEvent<HTMLInputElement> )=>{
                     setProducto({
                       ...producto,
                       [e.target.name]: e.target.value
@@ -66,7 +79,7 @@ const AgregarProducto =  () => {
                   placeholder='Precio del Producto'
                   className='bg-stone-200 rounded-md border-rose-300 block border-2 my-2 text-xl p-2 md:w-3/4 w-full focus:bg-white'
                   value={producto.precio || ''}
-                  onChange={e =>{
+                  onChange={(e : React.ChangeEvent<HTMLInputElement> )=>{
                     setProducto({
                       ...producto,
                       [e.target.name]: e.target.value
@@ -78,7 +91,7 @@ const AgregarProducto =  () => {
                   name="categoria"
                   className='bg-stone-200 rounded-md border-rose-300 block border-2 my-2 text-xl p-2 md:w-3/4 w-full focus:bg-white'
                   value={producto.categoria || ''}
-                  onChange={e =>{
+                  onChange={(e : React.ChangeEvent<HTMLSelectElement> ) =>{
                     setProducto({
                       ...producto,
                       [e.target.name]: e.target.value
@@ -99,7 +112,7 @@ const AgregarProducto =  () => {
                   placeholder='Link de la imagen'
                   className='bg-stone-200 rounded-md border-green-300 block border-2 my-2 text-xl p-2 md:w-3/4 w-full focus:bg-white'  
                   value={producto.imagen}
-                  onChange={e =>{
+                  onChange={(e : React.ChangeEvent<HTMLInputElement> ) =>{
                     setProducto({
                       ...producto,
                       [e.target.name]: e.target.value
@@ -114,7 +127,7 @@ const AgregarProducto =  () => {
                   placeholder='www.unapagina.com/hola'
                   className='bg-stone-200 rounded-md border-rose-300 block border-2 my-2 text-xl p-2 md:w-3/4 w-full focus:bg-white'  
                   value={producto.linked}
-                  onChange={e =>{
+                  onChange={(e : React.ChangeEvent<HTMLInputElement> ) =>{
                     setProducto({
                       ...producto,
                       [e.target.name]: e.target.value

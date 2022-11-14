@@ -1,27 +1,37 @@
-import {useEffect, useState} from 'react'
+import React, {useEffect, useState} from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import axios from 'axios';
 import Alerta from '../components/Alerta'
 
+interface IUsuario {
+    email: string;
+    password: string;
+}
+
+interface IAlerta {
+    msg: string | null;
+    error: boolean | null;
+}
+
 const Login = () => {
     
-    const [usuario, setUsuario] = useState({
+    const [usuario, setUsuario] = useState<IUsuario>({
         email: '',
         password: ''
     });
 
-    const [alerta, setAlerta] = useState({});
+    const [alerta, setAlerta] = useState<IAlerta>({msg:null,error:null});
     const navigate = useNavigate();
     useEffect(()=>{
         localStorage.removeItem('key');
         localStorage.removeItem('name');
     },[]);
     
-    const handleSubmit = e => {
+    const handleSubmit = (e : React.FormEvent<HTMLFormElement> )=> {
         e.preventDefault();
-        const login = async () =>{
+        const login : VoidFunction = async () =>{
             try {
-                const {data} = await axios.post(`${process.env.REACT_APP_URL_BACKEND}/login`, {
+                const {data} = await axios.post(`${import.meta.env.VITE_URL_BACKEND}/login`, {
                     headers: {
                       'Content-Type': 'application/json;charset=UTF-8',
                       'Access-Control-Allow-Origin': '*'
@@ -62,7 +72,7 @@ const Login = () => {
             <div className='flex  text-lg justify-center content-center bg-white'>
                 <div className='w-5/6 p-2 my-6'>
                     <h3 className='text-5xl font-light p-4'>Bienvenido</h3>
-                    <form className='font-normal uppercase text-md p-2'>
+                    <form className='font-normal uppercase text-md p-2' onSubmit={( e : React.FormEvent<HTMLFormElement> )=>handleSubmit(e)} >
                         <label htmlFor='email' className='block mt-3 p-2'>Correo electrónico</label>
                         <input 
                             type="text" 
@@ -70,7 +80,7 @@ const Login = () => {
                             name="email" 
                             placeholder="correo@correo.com" 
                             className='block font-light p-3 rounded-xl bg-slate-200 text-lg w-full'
-                            onChange={e=>{setUsuario({...usuario, [e.target.name]: e.target.value})}}
+                            onChange={(e : React.ChangeEvent<HTMLInputElement> ) =>{setUsuario({...usuario, [e.target.name]: e.target.value})}}
                         />
 
                         <label htmlFor='password' className='block mt-3 p-2'>Contraseña</label>
@@ -80,10 +90,10 @@ const Login = () => {
                             name="password" 
                             placeholder="Tu contraseña" 
                             className='block font-light p-3 rounded-xl bg-slate-200 text-lg w-full'
-                            onChange={e=>{setUsuario({...usuario, [e.target.name]: e.target.value})}}
+                            onChange={(e : React.ChangeEvent<HTMLInputElement> ) =>{setUsuario({...usuario, [e.target.name]: e.target.value})}}
                         />
                         
-                        <button type="submit" className='bg-rose-500 p-2 mt-4 rounded-3xl block text-white w-full' onClick={e=>handleSubmit(e)}>Iniciar Sesión</button>
+                        <button type="submit" className='bg-rose-500 p-2 mt-4 rounded-3xl block text-white w-full' >Iniciar Sesión</button>
                     </form>
                     {msg && <Alerta alerta={alerta}/>}
                 </div>

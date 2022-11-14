@@ -15,7 +15,7 @@ interface IAlerta {
     error: boolean | null
 }
 
-const EditarProducto =  () => {
+const EditarProducto : React.FC =  () : JSX.Element => {
   const [producto, setProducto]= useState<IProduct>({
         concepto:'',
         precio:'',

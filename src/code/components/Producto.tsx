@@ -29,7 +29,7 @@ interface IProps {
 }
 
 
-const Producto : React.FC<IProps> = ({concepto, precio, unidad, imagen, linked, cantidad, setCantidad, total, setTotal, lista, setLista, id}) => {
+const Producto : React.FC<IProps> = ({concepto, precio, unidad, imagen, linked, cantidad, setCantidad, total, setTotal, lista, setLista, id}) : JSX.Element => {
 
     const changeCantidad = (e: React.ChangeEvent<HTMLInputElement>) =>{
         const newCantidad : number = Number(e.target.value);

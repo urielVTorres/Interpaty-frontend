@@ -1,6 +1,6 @@
 import React from 'react'
 
-const CategoriaBar = () => {
+const CategoriaBar : React.FC = () : JSX.Element => {
   return (
     <>
         <button

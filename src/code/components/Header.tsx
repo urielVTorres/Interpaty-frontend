@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 
 const Header  = () : JSX.Element => {
   const [mostrar, setMostrar] = useState<boolean>(false);
-  const [nombre, setNombre]= useState<string>(localStorage.getItem('name') || '');
+  const [nombre]= useState<string>(localStorage.getItem('name') || '');
   return (
     <header className='container grid grid-cols-1 md:grid-cols-3 justify-center'>
       <div>
@@ -16,7 +16,7 @@ const Header  = () : JSX.Element => {
       </div>
         <div className='md:col-span-2 md:flex justify-end items-center text-center'>
           <button
-            className='text-xl md:hidden bg-rose-600 w-8 h-8 rounded-sm text-white font-black border-2 border-white '
+            className='absolute left-1 top-1 text-xl md:hidden bg-rose-600 w-8 h-8 rounded-sm text-white font-black border-2 border-white '
             children={mostrar? '─':'🞡'}
             onClick={()=>{setMostrar(!mostrar)}}
           />

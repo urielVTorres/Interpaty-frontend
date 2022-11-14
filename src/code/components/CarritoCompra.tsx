@@ -16,7 +16,7 @@ interface ICarrito {
 
 }
 
-const CarritoCompra : React.FunctionComponent<ICarrito>= ({finalizarCompra, total, setTotal, lista, setLista}) => {
+const CarritoCompra : React.FunctionComponent<ICarrito>= ({finalizarCompra, total, setTotal, lista, setLista}) : JSX.Element => {
   return (
     <div className='container resize-y  bg-rose-200 text-black font-normal w-80 h-40 p-2 rounded-md sticky bottom-8 opacity-90 -inset-3/4 overflow-auto hover:shadow-xl'>
                 <button
@@ -28,13 +28,13 @@ const CarritoCompra : React.FunctionComponent<ICarrito>= ({finalizarCompra, tota
                     {lista.map( (elemento : ILista) => <li key={elemento.id} className='flex justify-between shadow-lg p-2 rounded '>
                         <span className=' text-xl '> {elemento.cantidad} - {elemento.concepto}</span>
                         <button 
-                            className='text-white font-black text-xs bg-red-600 px-2 rounded-full'
+                            className='text-white font-black text-xs px-2'
                             onClick={() => {
                                 const newLista = lista.filter( ele => ele.id !== elemento.id);
                                 setLista(newLista);
                                 setTotal(total - elemento.precio*elemento.cantidad);
                             }}
-                        >╳</button>
+                        >❌</button>
                     </li>)}
                 </ul>
             </div>
