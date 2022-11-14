@@ -54,7 +54,7 @@ const EditarProducto : React.FC =  () : JSX.Element => {
     //Modificar el acceso de las políticas de CORS
     console.log(producto);
     try {
-      const {data} = await axios.put(`${process.env.REACT_APP_URL_BACKEND}/producto/${id}`, {
+      const {data} = await axios.put(`${import.meta.env.VITE_URL_BACKEND}/producto/${id}`, {
         headers: {
           'Content-Type': 'application/json;charset=UTF-8',
           'Access-Control-Allow-Origin': '*'
@@ -75,7 +75,7 @@ const EditarProducto : React.FC =  () : JSX.Element => {
     
     //Eliminar producto
     try {
-      const {data} = await axios.delete(`${process.env.REACT_APP_URL_BACKEND}/producto/${id}`, {
+      const {data} = await axios.delete(`${import.meta.env.VITE_URL_BACKEND}/producto/${id}`, {
         headers: {
           'Content-Type': 'application/json;charset=UTF-8',
           'Access-Control-Allow-Origin': '*'
