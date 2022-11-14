@@ -63,7 +63,6 @@ const Reportes = () : JSX.Element => {
             dates.push(hoy);
         }
         setFechas(dates);
-        console.log(fechas);
 
         const reporte = reportes.filter(reporte => {
             const fe = reporte.fecha.toString().slice(0,10);
