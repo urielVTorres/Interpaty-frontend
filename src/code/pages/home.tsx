@@ -1,18 +1,43 @@
 import axios from 'axios';
-import {useState, useEffect} from 'react';
+import React, {useState, useEffect} from 'react';
 import Producto from '../components/Producto';
 import CategoriaBar from '../components/CategoriaBar';
 import Alerta from '../components/Alerta';
 import CarritoCompra from '../components/CarritoCompra';
 
+interface ILista {
+    id: string;
+    concepto: string;
+    precio: number;
+    cantidad: number;
+}
+
+interface IAlerta {
+    msg: string | null,
+    error: boolean | null
+}
+
+interface IProduct {
+    _id: string;
+    concepto: string;
+    precio: number;
+    unidad: string;
+    imagen: string;
+    linked: string;
+    categoria: string;
+}
+
+
 const Home = () => {
-    const [total, setTotal] = useState(JSON.parse(localStorage.getItem('TotalCliente')) || 0);
-    const [lista, setLista] = useState(JSON.parse(localStorage.getItem('ClienteActual')) || []);
-    const [productos, setProductos] = useState([]);
-    const [busqueda, setBusqueda] = useState("");
-    const [alerta, setAlerta] = useState({});
-    const [cantidad, setCantidad] = useState(1);
-    const [categ, setCateg] = useState('');
+
+    const [total, setTotal] = useState<number>( Number(localStorage.getItem('TotalCliente') || 0));
+    // @ts-ignore
+    const [lista, setLista] = useState<ILista[]>( JSON.parse(localStorage.getItem('ClienteActual')) || []);
+    const [productos, setProductos] = useState<IProduct[]>([]);
+    const [busqueda, setBusqueda] = useState<string>("");
+    const [alerta, setAlerta] = useState<IAlerta>({msg: null, error: null});
+    const [cantidad, setCantidad] = useState<number>(1);
+    const [categ, setCateg] = useState<string>('');
 
     //Guardar la lista de compra del cliente en localStorage, para evitar que se pierda al recargar la página.
     useEffect(()=>{
@@ -25,14 +50,14 @@ const Home = () => {
     useEffect(()=>{
         const losProductos = async ()=>{
             try {
-                const {data} = await axios(`${process.env.REACT_APP_URL_BACKEND}/productos`,{
+                const {data} = await axios(`${import.meta.env.VITE_URL_BACKEND}/productos`,{
                     headers: {
                       'Content-Type': 'application/json;charset=UTF-8',
                       'Access-Control-Allow-Origin': '*'
                     }
                 });
                 // Organizar los datos en orden alfabetico
-                data.sort((a,b) => (a.concepto > b.concepto) ? 1 : ((b.concepto > a.concepto) ? -1 : 0));
+                data.sort((a:IProduct,b:IProduct) => (a.concepto > b.concepto) ? 1 : ((b.concepto > a.concepto) ? -1 : 0));
                 setProductos(data);
                 
             } catch (error) {
@@ -57,7 +82,7 @@ const Home = () => {
         setLista([]);
 
         setTimeout(()=>{
-            setAlerta({});
+            setAlerta({msg:null, error:null});
         },5000);
     }
 
@@ -78,7 +103,7 @@ const Home = () => {
             </div>
 
             {/* Barra de filtrado por categoría */}
-            <div className="px-3 mb-2" onClick={e=>{setCateg(e.target.value || "")}}>
+            <div className="px-3 mb-2" onClick={(e : any)=>{setCateg(e.target.value || "")}}>
                 <CategoriaBar />
             </div>
 
@@ -88,7 +113,7 @@ const Home = () => {
 
             {/* crea un objeto por cada procuto en el archivo "productos.json" */}
             <div className="grid md:grid-cols-2 lg:grid-cols-4 grid-cols-1 gap-4 "  >
-                {productos.filter(prod =>{
+                {productos.filter((prod : IProduct) =>{
                     if(busqueda === "" && categ ===""){
                         return prod
                     } else if(busqueda === "" && categ !== ""){
@@ -108,7 +133,7 @@ const Home = () => {
                         setTotal={setTotal}
                         lista={lista}
                         setLista={setLista}
-                        // imagen={objeto.imagen || ''}
+                        imagen={objeto.imagen || ''}
                         id={objeto._id}
                     />
                 </div>

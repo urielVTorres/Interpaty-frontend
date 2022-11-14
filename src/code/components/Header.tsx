@@ -1,9 +1,9 @@
 import {useState} from 'react'
 import { Link } from 'react-router-dom'
 
-const Header = () => {
-  const [mostrar, setMostrar] = useState(false);
-  const [nombre, setNombre]= useState(localStorage.getItem('name') || '');
+const Header  = () : JSX.Element => {
+  const [mostrar, setMostrar] = useState<boolean>(false);
+  const [nombre, setNombre]= useState<string>(localStorage.getItem('name') || '');
   return (
     <header className='container grid grid-cols-1 md:grid-cols-3 justify-center'>
       <div>

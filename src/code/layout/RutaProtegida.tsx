@@ -8,16 +8,16 @@ const RutaProtegida = () => {
   
   return (
     <>
-      {id? 
+      {/* {id?  */}
         <>
           <Header />
           <Outlet />
           <Footer />
-        </> :
+         </> {/*:
           <div>
             <Navigate to="/login" />
-          </div>
-      }
+          </div> */}
+      {/* } */}
     </>
     
   )

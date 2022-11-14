@@ -1,21 +1,37 @@
 import {useState, useEffect} from 'react';
 import axios from 'axios';
 
+interface ILista {
+    _id: string;
+    concepto: string;
+    unidad: string;
+    precio: number;
+    cantidad: number;
+}
+
+interface IReporte {
+    _id: string;
+    fecha: string;
+    lista: ILista[];
+    total: number;
+    vendedor: string;
+}
+
 
 const Reportes = () => {
     const date = new Date();
     const day = date.getDate() < 10 ? `0${date.getDate()}` : date.getDate();
     const hoy = `${date.getFullYear()}-${date.getMonth()+1}-${day}`;
-    const [fecha, setFecha] = useState(hoy);
-    const [reportes, setReportes] = useState([]);
-    const [dinero, setDinero] = useState(0);
-    const [detalle, setDetalle] = useState([]);
+    const [fecha, setFecha] = useState<string>(hoy);
+    const [reportes, setReportes] = useState<IReporte[]>([]);
+    const [dinero, setDinero] = useState<number>(0);
+    const [detalle, setDetalle] = useState<string>('');
 
     useEffect(()=>{
         const id = localStorage.getItem('key');
         const buscarReportes = async () =>{
             try {
-                const {data} = await axios.post(`${process.env.REACT_APP_URL_BACKEND}/reporte`, {
+                const {data} = await axios.post(`${import.meta.env.VITE_URL_BACKEND}/reporte`, {
                     headers: {
                       'Content-Type': 'application/json;charset=UTF-8',
                       'Access-Control-Allow-Origin': '*'
@@ -60,14 +76,16 @@ const Reportes = () => {
                 </form>
             </div>
             <div className='grid grid-cols-1 mx-auto text-center w-auto md:w-3/4'>
-                {reportes.filter( reporte => {
-                    if(fecha === "") return []
-                    return reporte.fecha.toString().includes(fecha);
-                }).map( (venta, index) => {
+                {reportes.filter( 
+                    reporte => {
+                        if(fecha === "") return []
+                        return reporte.fecha.toString().includes(fecha);
+                    }
+                ).map( (venta: IReporte , index: number) => {
                 return(
                     <div key={venta._id} className="m-1  bg-white p-1 md:p-2 font-arial md:text-2xl shadow-md text-base ">
                         <p className="flex justify-between items-center">
-                            <span className='px-5 font-black'>{index+1}</span > 
+                            <span className='px-5 font-black'>{index+1}</span >
                             <span className='px-5 font-bold text-teal-700'>{venta.fecha.toLocaleString('es-MX').slice(11,-5)}, {venta.fecha.toLocaleString('es-MX').slice(0,10)}</span >
                             <span className='px-5 font-black text-teal-700'>${venta.total}</span >
                             <button 
@@ -78,7 +96,8 @@ const Reportes = () => {
                         {detalle === venta._id ? <div className={`container resize-y ${detalle === venta._id? '' : 'hidden'}  bg-rose-200 text-rose-900 font-bold w-full h-36 text-lg p-2 rounded-xl opacity-90 -inset-3/4 overflow-auto hover:shadow-xl`}>
                             <button 
                                 className='bg-rose-700 text-white p-2 w-full rounded-md hover:bg-rose-900 '
-                                onClick={()=>{setDetalle("")}} >Cerrar</button>
+                                onClick={()=>{setDetalle("")}} 
+                            >Cerrar</button>
                                 {venta.lista.map( objeto => (
                                     <p key={objeto._id}
                                     className='grid grid-cols-3 shadow-lg py-1 px-10  rounded'

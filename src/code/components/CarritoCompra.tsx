@@ -12,7 +12,7 @@ interface ICarrito {
     total: number;
     setTotal: Dispatch<SetStateAction<number>>;
     lista: ILista[];
-    setLista: Dispatch<SetStateAction<ILista>>;
+    setLista: Dispatch<SetStateAction<ILista[]>>;
 
 }
 
@@ -25,8 +25,8 @@ const CarritoCompra : React.FunctionComponent<ICarrito>= ({finalizarCompra, tota
                     onClick={finalizarCompra}
                 />
                 <ul >
-                    {lista.map( (elemento,index) => <li key={index} className='flex justify-between shadow-lg p-2 rounded '>
-                        <span className=' text-xl ' >{elemento.cantidad} - {elemento.concepto}</span>
+                    {lista.map( (elemento : ILista) => <li key={elemento.id} className='flex justify-between shadow-lg p-2 rounded '>
+                        <span className=' text-xl '> {elemento.cantidad} - {elemento.concepto}</span>
                         <button 
                             className='text-white font-black text-xs bg-red-600 px-2 rounded-full'
                             onClick={() => {
