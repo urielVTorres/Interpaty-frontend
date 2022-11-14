@@ -32,7 +32,7 @@ const EditarProducto : React.FC =  () : JSX.Element => {
         const idProducto : string | null =  localStorage.getItem("productoID");
         setID(idProducto);
         try {
-            const {data} = await axios(`${process.env.REACT_APP_URL_BACKEND}/producto/${id}`,{
+            const {data} = await axios(`${import.meta.env.VITE_URL_BACKEND}/producto/${id}`,{
                 headers: {
                   'Content-Type': 'application/json;charset=UTF-8',
                   'Access-Control-Allow-Origin': '*'

@@ -28,7 +28,7 @@ const AgregarProducto : React.FunctionComponent =  () : JSX.Element => {
     e.preventDefault();
     //Modificar el acceso de las políticas de CORS
     try {
-      const {data}  = await axios.post(`${process.env.REACT_APP_URL_BACKEND}/agregar`, {
+      const {data}  = await axios.post(`${import.meta.env.VITE_URL_BACKEND}/agregar`, {
         headers: {
           'Content-Type': 'application/json;charset=UTF-8',
           'Access-Control-Allow-Origin': '*'

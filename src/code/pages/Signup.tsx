@@ -43,7 +43,7 @@ const Signup : React.FunctionComponent = () : JSX.Element => {
 
         const signup = async () =>{
             try {
-                const {data} = await axios.post(`${process.env.REACT_APP_URL_BACKEND}/signup`, {
+                const {data} = await axios.post(`${import.meta.env.VITE_URL_BACKEND}/signup`, {
                     headers: {
                       'Content-Type': 'application/json;charset=UTF-8',
                       'Access-Control-Allow-Origin': '*'
