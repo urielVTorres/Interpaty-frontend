@@ -4,7 +4,7 @@ import Footer from '../components/Footer'
 
 const AuthLayout : React.FunctionComponent = () : JSX.Element => {
   return (
-    <div className='w-full h-full mt-10 bg-cyan-300'>
+    <div className='w-full h-full mt-10'>
         <div className=''>
             <Outlet />
         </div>
