@@ -5,7 +5,7 @@ import axios from 'axios';
 const Reportes = () => {
     const date = new Date();
     const day = date.getDate() < 10 ? `0${date.getDate()}` : date.getDate();
-    const hoy = `${date.getFullYear()}-${date.getMonth()+1}-${day}`;
+    const hoy = `${date.getFullYear()}-${date.getMonth()+1 < 10 ? `0${date.getMonth()+1}` : date.getMonth()+1}-${day}`;
     const [fecha, setFecha] = useState(hoy);
     const [reportes, setReportes] = useState([]);
     const [dinero, setDinero] = useState(0);
