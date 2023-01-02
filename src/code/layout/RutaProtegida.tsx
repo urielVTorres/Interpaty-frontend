@@ -30,9 +30,9 @@ const RutaProtegida : React.FunctionComponent = () : JSX.Element => {
                 />
                 
                 <nav className={`font-black text-sm uppercase flex flex-col md:grid md: grid-cols-4 justify-center items-center md:justify-end cursor-auto ${mostrar? 'block': 'hidden'} md:block `}>
-                    <button onClick={()=>setPage("nuevo-producto")} className='px-5 py-2 text-center w-auto' >Nuevo Producto</button>
-                    <button  onClick={()=>setPage("reporte")} className='px-5 py-2 text-center w-auto'>Reportes</button>
                     <button  onClick={()=>setPage("home")} className='px-5 py-2 text-center  w-auto'>Nuevo Cliente</button>
+                    <button  onClick={()=>setPage("reporte")} className='px-5 py-2 text-center w-auto'>Reportes</button>
+                    <button onClick={()=>setPage("agregar-producto")} className='px-5 py-2 text-center w-auto' >Nuevo Producto</button>
                     <button  onClick={()=>setPage("login")} className='px-5 py-2 text-center  w-auto' >Cerrar Sesión</button>
                 </nav>
                 </div>

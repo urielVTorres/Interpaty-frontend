@@ -129,8 +129,8 @@ const EditarProducto : React.FC =  () : JSX.Element => {
     <div className='text-gray-800 grid md:grid-cols-2 grid-cols-1 items-center'>
       <h1 className='text-4xl font-bold text-center' >Edita el <span className="text-cyan-600">Producto</span></h1>
         <div className='container  justify-center mx-10 w-full'>
-            <form className='md:col-span-2 w-4/5 justify-center' onSubmit={handleSubmit}>
-                <label className='font-black text-2xl ' children="Nombre:*"/>
+            <form className='w-4/5 grid grid-cols-1' onSubmit={handleSubmit}>
+                <label className='font-black text-2xl text-start' children="Nombre:*"/>
                 <input 
                   type="text" 
                   name="concepto"
@@ -145,7 +145,7 @@ const EditarProducto : React.FC =  () : JSX.Element => {
                   }}
                 />
 
-                <label className='font-black text-2xl ' children="Precio:*"/>
+                <label className='font-black text-2xl text-start' children="Precio:*"/>
                 <input 
                   type="number" 
                   name="precio"
@@ -159,7 +159,7 @@ const EditarProducto : React.FC =  () : JSX.Element => {
                     })
                   }}
                 />
-                <label className='font-black text-2xl ' children="Categoría:*"/>
+                <label className='font-black text-2xl text-start' children="Categoría:*"/>
                 <select  
                   name="categoria"
                   className='bg-stone-200 rounded-md border-rose-300 block border-2 my-2 text-xl p-2 md:w-3/4 w-full focus:bg-white'
@@ -178,7 +178,7 @@ const EditarProducto : React.FC =  () : JSX.Element => {
                   <option value="otros">Otros</option>
                 </select>
                 
-                <label className='font-black text-2xl ' children="Link de la página:"/>
+                <label className='font-black text-2xl text-start' children="Link de la página:"/>
                 <input 
                   type="text" 
                   name="linked"

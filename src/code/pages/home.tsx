@@ -38,7 +38,7 @@ const Home = () => {
     const [alerta, setAlerta] = useState<IAlerta>({msg: null, error: null});
     const [cantidad, setCantidad] = useState<number>(1);
     const [categ, setCateg] = useState<string>('');
-    const [vista, setVista] = useState<string>('lista');
+    const [vista, setVista] = useState<string>(localStorage.getItem('view') ||'cuadro');
 
     //Guardar la lista de compra del cliente en localStorage, para evitar que se pierda al recargar la página.
     useEffect(()=>{
@@ -108,14 +108,16 @@ const Home = () => {
                 <div className="px-3 mb-2" onClick={(e : any)=>{setCateg(e.target.value || "")}}>
                     <CategoriaBar />
                 </div>
-                <div>
+                <div className="invisible md:visible ">
                     <span>Vista: </span> 
                     <select
                         name="vista"
                         onChange={e => {
-                            setVista(e.target.value)
+                            setVista(e.target.value);
+                            localStorage.setItem("view", e.target.value);
                         }}
                     >
+                        <option value="" selected disabled hidden>Elegir</option>
                         <option value="lista">Lista</option>
                         <option value="cuadro">Cuadricula</option>
                     </select>

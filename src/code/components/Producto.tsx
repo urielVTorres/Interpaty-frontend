@@ -54,7 +54,7 @@ const Producto : React.FC<IProps> = ({concepto, precio, unidad, imagen, linked, 
                             <FontAwesomeIcon icon={faPenToSquare} color="gray" className="flex" size="lg"  />
                         </Link>
                     </div>
-                    <h2 className='font-black text-2xl text-center text-gray-800'
+                    <h2 className='text-xl text-center text-gray-800'
                         onClick={()=>{
                             if(linked === "#")
                                 return;
@@ -62,7 +62,7 @@ const Producto : React.FC<IProps> = ({concepto, precio, unidad, imagen, linked, 
                             }
                         }
                         >{concepto}</h2>
-                    <p className='text-xl text-center font-black text-cyan-600'>
+                    <p className='text-lg text-center font-black text-cyan-600'>
                         <span className='font-black'>Precio: </span>${precio} {unidad}  
                     </p>
                 </div>
@@ -104,7 +104,7 @@ const Producto : React.FC<IProps> = ({concepto, precio, unidad, imagen, linked, 
                     </Link>
                 </div>
                 <div className='container py-5 px-16 flex justify-between items-center' >
-                    <span className='font-black text-2xl text-gray-800 col-span-2 text-start'
+                    <span className='text-2xl text-gray-800 col-span-2 text-start'
                         onClick={()=>{
                             if(linked === "#")
                                 return;
