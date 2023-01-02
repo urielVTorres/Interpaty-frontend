@@ -8,19 +8,16 @@ import RutaProtegida from './code/layout/RutaProtegida';
 import Login from './code/pages/Login';
 import AuthLayout from './code/layout/AuthLayout';
 import Signup from './code/pages/Signup';
-
+import { useState } from 'react';
 
 function App() : JSX.Element {
+
     return (
         <Router>
             <div>
                 <Routes>
-                    <Route path='/' element={<RutaProtegida />}>
-                        <Route index element={<Home />} />
-                        <Route path="reporte" element={<Reportes />}/>
-                        <Route path="nuevo-producto" element={<AgregarProducto />} />
-                        <Route path="/editar/:id" element={<EditarProducto />} />
-                    </Route>
+                    <Route path='/' element={<RutaProtegida />}></Route>
+                    <Route path="/editar/:id" element={<EditarProducto />} />
                     <Route path='/login' element={<AuthLayout />} >
                         <Route index element={<Login />} />
                         <Route path="/login/signup" element={<Signup />} />

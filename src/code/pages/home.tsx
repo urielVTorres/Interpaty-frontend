@@ -38,6 +38,7 @@ const Home = () => {
     const [alerta, setAlerta] = useState<IAlerta>({msg: null, error: null});
     const [cantidad, setCantidad] = useState<number>(1);
     const [categ, setCateg] = useState<string>('');
+    const [vista, setVista] = useState<string>('lista');
 
     //Guardar la lista de compra del cliente en localStorage, para evitar que se pierda al recargar la página.
     useEffect(()=>{
@@ -103,8 +104,22 @@ const Home = () => {
             </div>
 
             {/* Barra de filtrado por categoría */}
-            <div className="px-3 mb-2" onClick={(e : any)=>{setCateg(e.target.value || "")}}>
-                <CategoriaBar />
+            <div className='flex justify-between px-10'>
+                <div className="px-3 mb-2" onClick={(e : any)=>{setCateg(e.target.value || "")}}>
+                    <CategoriaBar />
+                </div>
+                <div>
+                    <span>Vista: </span> 
+                    <select
+                        name="vista"
+                        onChange={e => {
+                            setVista(e.target.value)
+                        }}
+                    >
+                        <option value="lista">Lista</option>
+                        <option value="cuadro">Cuadricula</option>
+                    </select>
+                </div>
             </div>
 
             <div className='absolute'>
@@ -112,7 +127,7 @@ const Home = () => {
             </div>
 
             {/* crea un objeto por cada procuto en el archivo "productos.json" */}
-            <div className="grid md:grid-cols-2 lg:grid-cols-4 grid-cols-1 gap-4 "  >
+            <div className={`grid ${vista == "cuadro" ? "md:grid-cols-2 lg:grid-cols-3 " : "md:grid-cols-1"} grid-cols-1 gap-4`}  >
                 {productos.filter((prod : IProduct) =>{
                     if(busqueda === "" && categ ===""){
                         return prod
@@ -135,6 +150,7 @@ const Home = () => {
                         setLista={setLista}
                         imagen={objeto.imagen || ''}
                         id={objeto._id}
+                        vista={vista}
                     />
                 </div>
                 )}

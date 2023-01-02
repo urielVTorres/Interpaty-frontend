@@ -2,7 +2,7 @@ import React from 'react'
 
 const CategoriaBar : React.FC = () : JSX.Element => {
   return (
-    <>
+    <div className='flex'>
         <button
         type='button'
         value=''
@@ -34,7 +34,7 @@ const CategoriaBar : React.FC = () : JSX.Element => {
             children='Otros'
             className="px-2 py-1 mr-2 hover:bg-cyan-800 hover:text-white font-bold text-md text-gray-800 rounded-xl"
         />
-    </>
+    </div>
     )
 }
 

@@ -26,10 +26,11 @@ interface IProps {
     lista: ILista[];
     setLista: React.Dispatch<SetStateAction<ILista[]>>;
     id: string;
+    vista: string;
 }
 
 
-const Producto : React.FC<IProps> = ({concepto, precio, unidad, imagen, linked, cantidad, setCantidad, total, setTotal, lista, setLista, id}) : JSX.Element => {
+const Producto : React.FC<IProps> = ({concepto, precio, unidad, imagen, linked, cantidad, setCantidad, total, setTotal, lista, setLista, id, vista}) : JSX.Element => {
 
     const changeCantidad = (e: React.ChangeEvent<HTMLInputElement>) =>{
         const newCantidad : number = Number(e.target.value);
@@ -39,63 +40,114 @@ const Producto : React.FC<IProps> = ({concepto, precio, unidad, imagen, linked, 
     
     return (
         <>
-
             {/* <img src={imagen} alt="foto del producto" className='h-56 m-auto' onClick={()=>{
                     if(linked !== "#")
                         window.open(linked);
                     else return;
                 }
                 } /> */}
+            {vista == "cuadro" ? 
+            <div> 
+                <div className='container p-5' >
+                    <div className=" block  w-fit ">
+                        <Link to={`/editar/${id}`} > 
+                            <FontAwesomeIcon icon={faPenToSquare} color="gray" className="flex" size="lg"  />
+                        </Link>
+                    </div>
+                    <h2 className='font-black text-2xl text-center text-gray-800'
+                        onClick={()=>{
+                            if(linked === "#")
+                                return;
+                            window.open(linked);
+                            }
+                        }
+                        >{concepto}</h2>
+                    <p className='text-xl text-center font-black text-cyan-600'>
+                        <span className='font-black'>Precio: </span>${precio} {unidad}  
+                    </p>
+                </div>
+                <form className='container grid grid-cols-2 mb-2'>
+                    <input 
+                        type="number"
+                        placeholder='Cantidad'
+                        className="font-semibold text-lg px-3 rounded-md bg-gray-100 w-auto mx-3 border-2"
+                        onChange={changeCantidad}
+                        onBlurCapture={(e : React.FocusEvent<HTMLInputElement> ) => {
+                            e.target.value = ''}
+                        }
+                    />
+                    <input 
+                        className=' m-auto bg-rose-600 rounded-md py-2 px-10 font-bold text-white '
+                        type="submit"
+                        onClick={e => {
+                            e.preventDefault();
+                            setTotal(total + precio*Math.abs(cantidad));
+                            const item : ILista = {
+                                id: Date.now().toString(),
+                                concepto: concepto,
+                                precio: precio,
+                                cantidad: Math.abs(cantidad)
+                            }
 
-            <div className='container p-5' >
-                <div className=" block  w-fit ">
+                            setLista([...lista, item]);
+                            setCantidad(1);
+
+                        }}
+                        value="Agregar"
+                    />
+                </form>
+            </div> : 
+            <div>
+                <div className="m-3 w-fit absolute">
                     <Link to={`/editar/${id}`} > 
                         <FontAwesomeIcon icon={faPenToSquare} color="gray" className="flex" size="lg"  />
                     </Link>
                 </div>
-                <h2 className='font-black text-2xl text-center text-gray-800'
-                    onClick={()=>{
-                        if(linked === "#")
-                            return;
-                        window.open(linked);
+                <div className='container py-5 px-16 flex justify-between items-center' >
+                    <span className='font-black text-2xl text-gray-800 col-span-2 text-start'
+                        onClick={()=>{
+                            if(linked === "#")
+                                return;
+                            window.open(linked);
+                            }
                         }
-                    }
-                    >{concepto}</h2>
-                <p className='text-xl text-center font-black text-cyan-600'>
-                    <span className='font-black'>Precio: </span>${precio} {unidad}  
-                </p>
+                        >{concepto}</span>
+                    <span className='text-xl font-black text-cyan-600'>
+                        <span className='font-black'>Precio: </span>${precio} {unidad}  
+                    </span>
+                </div>
+                <form className='container grid grid-cols-2 mb-2'>
+                    <input 
+                        type="number"
+                        placeholder='Cantidad'
+                        className="font-semibold text-lg px-3 rounded-md bg-gray-100 w-auto mx-3 border-2"
+                        onChange={changeCantidad}
+                        onBlurCapture={(e : React.FocusEvent<HTMLInputElement> ) => {
+                            e.target.value = ''}
+                        }
+                    />
+                    <input 
+                        className=' m-auto bg-rose-600 rounded-md py-2 px-10 font-bold text-white '
+                        type="submit"
+                        onClick={e => {
+                            e.preventDefault();
+                            setTotal(total + precio*Math.abs(cantidad));
+                            const item : ILista = {
+                                id: Date.now().toString(),
+                                concepto: concepto,
+                                precio: precio,
+                                cantidad: Math.abs(cantidad)
+                            }
+
+                            setLista([...lista, item]);
+                            setCantidad(1);
+
+                        }}
+                        value="Agregar"
+                    />
+                </form>
             </div>
-            <form className='container grid grid-cols-2 mb-2'>
-                <input 
-                    type="number"
-                    placeholder='Cantidad'
-                    className="font-semibold text-lg px-3 rounded-md bg-gray-100 w-auto mx-3 border-2"
-                    onChange={changeCantidad}
-                    onBlurCapture={(e : React.FocusEvent<HTMLInputElement> ) => {
-                        e.target.value = ''}
-                    }
-                />
-                <input 
-                    className=' m-auto bg-rose-600 rounded-md py-2 px-10 font-bold text-white '
-                    type="submit"
-                    onClick={e => {
-                        e.preventDefault();
-                        setTotal(total + precio*Math.abs(cantidad));
-                        const item : ILista = {
-                            id: Date.now().toString(),
-                            concepto: concepto,
-                            precio: precio,
-                            cantidad: Math.abs(cantidad)
-                        }
-
-                        setLista([...lista, item]);
-                        setCantidad(1);
-
-                    }}
-                    value="Agregar"
-                />
-            </form>
-
+            }
         </>
     )
 }

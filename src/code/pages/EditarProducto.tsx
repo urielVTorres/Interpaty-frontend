@@ -1,4 +1,5 @@
 import React, {useState, useEffect} from 'react'
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios'
 import Alerta from '../components/Alerta';
 
@@ -26,6 +27,7 @@ const EditarProducto : React.FC =  () : JSX.Element => {
 
   const [alerta, setAlerta] = useState<IAlerta>({msg: null, error: null});
   const [id, setID] = useState<string | null>(localStorage.getItem("productoID") || '');
+  const navigate = useNavigate();
   //const ide = document.location.pathname.substr(8)
   useEffect(()=>{
     const losProductos = async ()=>{
@@ -96,9 +98,34 @@ const EditarProducto : React.FC =  () : JSX.Element => {
       console.log(error);
     }
   }
+  const [mostrar, setMostrar] = useState<boolean>(false);
+  const [nombre]= useState<string>(localStorage.getItem('name') || '');
 
   const {msg} = alerta;
   return (
+    <>
+        <header className='container grid grid-cols-1 md:grid-cols-3 justify-center'>
+            <div>
+                <h1 className="font-black text-3xl my-5 flex justify-center md:justify-start md:px-5">
+                    INTER<span className=" text-rose-600">PATY</span>
+                </h1>
+                <h1 className="font-bold text-gray-800 text-xl flex justify-center md:justify-start md:px-3">
+                Bienvenido {nombre}.
+                </h1>
+            </div>
+                <div className='md:col-span-2 md:flex justify-end items-center text-center'>
+                <button
+                    className='absolute left-1 top-1 text-xl md:hidden bg-rose-600 w-8 h-8 rounded-sm text-white font-black border-2 border-white '
+                    children={mostrar? '─':'🞡'}
+                    onClick={()=>{setMostrar(!mostrar)}}
+                />
+                
+                <nav className={`font-black text-sm uppercase flex md:justify-end cursor-auto ${mostrar? 'block': 'hidden'} md:block `}>
+                    <button onClick={()=>navigate("/")} className='px-5 py-2 w-auto bg-rose-500 text-white rounded-md' >Regresar</button>
+                </nav>
+                </div>
+        </header>
+
     <div className='text-gray-800 grid md:grid-cols-2 grid-cols-1 items-center'>
       <h1 className='text-4xl font-bold text-center' >Edita el <span className="text-cyan-600">Producto</span></h1>
         <div className='container  justify-center mx-10 w-full'>
@@ -181,6 +208,7 @@ const EditarProducto : React.FC =  () : JSX.Element => {
             </form>
         </div>
     </div>
+    </>
   )
 }
 

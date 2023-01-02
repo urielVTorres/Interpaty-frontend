@@ -21,7 +21,8 @@ interface IReporte {
 const Reportes = () : JSX.Element => {
     const date : Date = new Date();
     const day : string | number  = date.getDate() < 10 ? `0${date.getDate()}` : date.getDate();
-    const hoy : string = `${date.getFullYear()}-${date.getMonth() + 1}-${day}`;
+    const month : string | number  = date.getMonth() + 1 < 10 ? `0${date.getMonth()+1}` : date.getMonth()+1;
+    const hoy : string = `${date.getFullYear()}-${month}-${day}`;
     const [fecha1, setFecha1] = useState<string>(hoy);
     const [fecha2, setFecha2] = useState<string>(hoy);
     const [fechas, setFechas] = useState<string[]>([]);
@@ -59,11 +60,12 @@ const Reportes = () : JSX.Element => {
         for(let i = Date.parse(fecha1)+86400000; i <= Date.parse(fecha2)+86400000; i+=86400000){
             const date1 = new Date(i);
             const day : string | number  = date1.getDate() < 10 ? `0${date1.getDate()}` : date1.getDate();
-            const hoy : string = `${date.getFullYear()}-${date.getMonth() + 1}-${day}`;
+            const month : string | number  = date.getMonth() + 1 < 10 ? `0${date.getMonth()+1}` : date.getMonth()+1;
+            const hoy : string = `${date.getFullYear()}-${month}-${day}`;
             dates.push(hoy);
         }
         setFechas(dates);
-
+        console.log(dates);
         const reporte = reportes.filter(reporte => {
             const fe = reporte.fecha.toString().slice(0,10);
             return fechas.indexOf(fe) != -1 ;
