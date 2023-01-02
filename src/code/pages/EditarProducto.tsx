@@ -34,7 +34,7 @@ const EditarProducto : React.FC =  () : JSX.Element => {
         const idProducto : string | null =  localStorage.getItem("productoID");
         setID(idProducto);
         try {
-            const {data} = await axios(`${import.meta.env.VITE_URL_BACKEND}/producto/${id}`,{
+            const {data} = await axios(`https://interpaty-backend-production.up.railway.app/producto/${id}`,{
                 headers: {
                   'Content-Type': 'application/json;charset=UTF-8',
                   'Access-Control-Allow-Origin': '*'
@@ -56,7 +56,7 @@ const EditarProducto : React.FC =  () : JSX.Element => {
     //Modificar el acceso de las políticas de CORS
     console.log(producto);
     try {
-      const {data} = await axios.put(`${import.meta.env.VITE_URL_BACKEND}/producto/${id}`, {
+      const {data} = await axios.put(`https://interpaty-backend-production.up.railway.app/producto/${id}`, {
         headers: {
           'Content-Type': 'application/json;charset=UTF-8',
           'Access-Control-Allow-Origin': '*'
@@ -77,7 +77,7 @@ const EditarProducto : React.FC =  () : JSX.Element => {
     
     //Eliminar producto
     try {
-      const {data} = await axios.delete(`${import.meta.env.VITE_URL_BACKEND}/producto/${id}`, {
+      const {data} = await axios.delete(`https://interpaty-backend-production.up.railway.app/producto/${id}`, {
         headers: {
           'Content-Type': 'application/json;charset=UTF-8',
           'Access-Control-Allow-Origin': '*'

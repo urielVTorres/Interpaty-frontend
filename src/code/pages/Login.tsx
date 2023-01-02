@@ -31,7 +31,7 @@ const Login = () => {
         e.preventDefault();
         const login : VoidFunction = async () =>{
             try {
-                const {data} = await axios.post(`${import.meta.env.VITE_URL_BACKEND}/login`, {
+                const {data} = await axios.post(`https://interpaty-backend-production.up.railway.app/login`, {
                     headers: {
                       'Content-Type': 'application/json;charset=UTF-8',
                       'Access-Control-Allow-Origin': '*'

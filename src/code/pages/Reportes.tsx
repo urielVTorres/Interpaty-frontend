@@ -34,7 +34,7 @@ const Reportes = () : JSX.Element => {
         const id : string | null = localStorage.getItem('key');
         const buscarReportes = async () => {
             try {
-                const { data } = await axios.post(`${import.meta.env.VITE_URL_BACKEND}/reporte`, {
+                const { data } = await axios.post(`https://interpaty-backend-production.up.railway.app/reporte`, {
                     headers: {
                         'Content-Type': 'application/json;charset=UTF-8',
                         'Access-Control-Allow-Origin': '*'

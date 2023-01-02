@@ -43,7 +43,7 @@ const Signup : React.FunctionComponent = () : JSX.Element => {
 
         const signup = async () =>{
             try {
-                const {data} = await axios.post(`${import.meta.env.VITE_URL_BACKEND}/signup`, {
+                const {data} = await axios.post(`https://interpaty-backend-production.up.railway.app/signup`, {
                     headers: {
                       'Content-Type': 'application/json;charset=UTF-8',
                       'Access-Control-Allow-Origin': '*'
