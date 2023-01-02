@@ -60,8 +60,8 @@ const Reportes = () : JSX.Element => {
         for(let i = Date.parse(fecha1)+86400000; i <= Date.parse(fecha2)+86400000; i+=86400000){
             const date1 = new Date(i);
             const day : string | number  = date1.getDate() < 10 ? `0${date1.getDate()}` : date1.getDate();
-            const month : string | number  = date.getMonth() + 1 < 10 ? `0${date.getMonth()+1}` : date.getMonth()+1;
-            const hoy : string = `${date.getFullYear()}-${month}-${day}`;
+            const month : string | number  = date1.getMonth() + 1 < 10 ? `0${date1.getMonth()+1}` : date1.getMonth()+1;
+            const hoy : string = `${date1.getFullYear()}-${month}-${day}`;
             dates.push(hoy);
         }
         setFechas(dates);
