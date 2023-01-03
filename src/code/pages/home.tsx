@@ -104,7 +104,7 @@ const Home = () => {
             </div>
 
             {/* Barra de filtrado por categoría */}
-            <div className='flex justify-between px-10'>
+            <div className='flex justify-between md:px-10'>
                 <div className="px-3 mb-2" onClick={(e : any)=>{setCateg(e.target.value || "")}}>
                     <CategoriaBar />
                 </div>
