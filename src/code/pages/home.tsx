@@ -112,12 +112,13 @@ const Home = () => {
                     <span>Vista: </span> 
                     <select
                         name="vista"
+                        defaultValue={vista}
                         onChange={e => {
                             setVista(e.target.value);
                             localStorage.setItem("view", e.target.value);
                         }}
                     >
-                        <option value="" selected disabled hidden>Elegir</option>
+                        <option value="" disabled hidden>Elegir</option>
                         <option value="lista">Lista</option>
                         <option value="cuadro">Cuadricula</option>
                     </select>
