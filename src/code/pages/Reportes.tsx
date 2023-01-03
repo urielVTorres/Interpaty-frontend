@@ -29,7 +29,7 @@ const Reportes = () : JSX.Element => {
     const [reportes, setReportes] = useState<IReporte[]>([]);
     const [dinero, setDinero] = useState<number>(0);
     const [detalle, setDetalle] = useState<string>('');
-
+    let money = 0;
     useEffect(() => {
         const id : string | null = localStorage.getItem('key');
         const buscarReportes = async () => {
@@ -52,9 +52,8 @@ const Reportes = () : JSX.Element => {
         }
         buscarReportes();
     }, []);
+    const actualizarReporte = ()=>{
 
-    useEffect(() => {
-        let money = 0;
         let dates : string[] = [];
         setDinero(0);
         for(let i = Date.parse(fecha1)+86400000; i <= Date.parse(fecha2)+86400000; i+=86400000){
@@ -65,7 +64,13 @@ const Reportes = () : JSX.Element => {
             dates.push(hoy);
         }
         setFechas(dates);
-        console.log(dates);
+    }
+    useEffect(() => {
+        actualizarReporte();
+    }, [fecha1, fecha2, reportes])
+
+    useEffect(()=>{
+        let money = 0;
         const reporte = reportes.filter(reporte => {
             const fe = reporte.fecha.toString().slice(0,10);
             return fechas.indexOf(fe) != -1 ;
@@ -75,7 +80,7 @@ const Reportes = () : JSX.Element => {
         });
         
         setDinero(money);
-    }, [fecha1, fecha2, reportes])
+    }, [fechas])
 
 
     return <>
