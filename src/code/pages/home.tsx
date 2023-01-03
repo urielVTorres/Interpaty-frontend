@@ -130,7 +130,7 @@ const Home = () => {
             </div>
 
             {/* crea un objeto por cada procuto en el archivo "productos.json" */}
-            <div className={`grid ${vista == "cuadro" ? "md:grid-cols-2 lg:grid-cols-3 " : "md:grid-cols-1"} grid-cols-1 gap-4`}  >
+            <div className={`grid ${vista == "cuadro" ? "md:grid-cols-2 lg:grid-cols-3 gap-4" : "md:grid-cols-1 gap-1"} grid-cols-1 `}  >
                 {productos.filter((prod : IProduct) =>{
                     if(busqueda === "" && categ ===""){
                         return prod
@@ -139,7 +139,7 @@ const Home = () => {
                     }
                     return (prod.concepto.toLowerCase().includes(busqueda.toLowerCase()) && prod.categoria?.toLowerCase().includes(categ.toLowerCase()));
                 }).map( objeto =>  
-                <div key={objeto._id} className='container mx-auto bg-gradient-to-br to-rose-200 from-cyan-200 rounded-xl p-2 w-full hover:shadow-lg' onClick={e => {localStorage.setItem('productoID', objeto._id)}}>
+                <div key={objeto._id} className={`container mx-auto ${vista == "cuadro" ? "bg-gradient-to-br to-rose-200 from-cyan-200 rounded-md p-2 hover:from-cyan-300 hover:to-rose-300": "bg-slate-100 border-2 border-slate-200 hover:bg-slate-200"}`} onClick={e => {localStorage.setItem('productoID', objeto._id)}}>
                     <Producto 
                         concepto={objeto.concepto} 
                         precio={objeto.precio}

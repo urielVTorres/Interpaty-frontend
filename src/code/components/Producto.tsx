@@ -97,14 +97,14 @@ const Producto : React.FC<IProps> = ({concepto, precio, unidad, imagen, linked, 
                     />
                 </form>
             </div> : 
-            <div>
-                <div className="m-3 w-fit absolute">
+            <div className="grid grid-cols-3">
+                <div className="mx-3  my-2 absolute">
                     <Link to={`/editar/${id}`} > 
                         <FontAwesomeIcon icon={faPenToSquare} color="gray" className="flex" size="lg"  />
                     </Link>
                 </div>
-                <div className='container py-5 px-16 flex justify-between items-center' >
-                    <span className='text-2xl text-gray-800 col-span-2 text-start'
+                <div className='container col-span-2 px-16 flex justify-between items-center text-start' >
+                    <span className='text-xl text-gray-800 col-span-2'
                         onClick={()=>{
                             if(linked === "#")
                                 return;
@@ -112,22 +112,22 @@ const Producto : React.FC<IProps> = ({concepto, precio, unidad, imagen, linked, 
                             }
                         }
                         >{concepto}</span>
-                    <span className='text-xl font-black text-cyan-600'>
-                        <span className='font-black'>Precio: </span>${precio} {unidad}  
+                    <span className='text-lg font-bold text-cyan-600'>
+                        $ {precio} {unidad}  
                     </span>
                 </div>
-                <form className='container grid grid-cols-2 mb-2'>
+                <form className='flex items-center justify-end'>
                     <input 
                         type="number"
                         placeholder='Cantidad'
-                        className="font-semibold text-lg px-3 rounded-md bg-gray-100 w-auto mx-3 border-2"
+                        className="text-lg px-3 h-5/6 rounded-md bg-gray-50 border-2"
                         onChange={changeCantidad}
                         onBlurCapture={(e : React.FocusEvent<HTMLInputElement> ) => {
                             e.target.value = ''}
                         }
                     />
                     <input 
-                        className=' m-auto bg-rose-600 rounded-md py-2 px-10 font-bold text-white '
+                        className=' bg-rose-600 rounded-md  font-black px-5 m-1 text-white'
                         type="submit"
                         onClick={e => {
                             e.preventDefault();
@@ -143,7 +143,7 @@ const Producto : React.FC<IProps> = ({concepto, precio, unidad, imagen, linked, 
                             setCantidad(1);
 
                         }}
-                        value="Agregar"
+                        value="+"
                     />
                 </form>
             </div>
